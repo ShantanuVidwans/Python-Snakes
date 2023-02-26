@@ -21,6 +21,12 @@ class Snake():
         if food.rect.colliderect(self.body[-1]):
             return True
         return False
+    
+    def did_hit_self(self):
+        for i in self.body[0:-2]:
+            if self.body[-1].rect.colliderect(i.rect):
+                return True
+        return False
 
     def grow(self):
         coor = self.body[-1].rect.topleft

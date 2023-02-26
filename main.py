@@ -81,7 +81,10 @@ while True:
         (curr_direction, status) = snake.move("down", curr_direction)
     else:
         (curr_direction, status) = snake.move(curr_direction, curr_direction)
+    if snake.did_hit_self():
+        status = "end"
     if status == "end":
+        curr_direction = "right"
         while True:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -90,6 +93,7 @@ while True:
             key = pygame.key.get_pressed()
             if key[SPACE]:
                 snake = Snake(config)
+                score = 0
                 break
             pygame.draw.rect(screen, BLACK, background)
             pygame.draw.rect(screen, GREEN, edges.edge_left)
@@ -100,7 +104,7 @@ while True:
             screen.blit(title_text_surf, title_text_rect)
 
             score_text = text_font.render(str(score), False, "Blue")
-            screen.blit(score_text, (760, 6))
+            screen.blit(score_text, (740, 6))
 
             for i in snake.body:
                 screen.blit(i.surf, i.rect)
@@ -118,7 +122,7 @@ while True:
     screen.blit(food.surf, food.rect)
 
     score_text = text_font.render(str(score), False, "Blue")
-    screen.blit(score_text, (760, 6))
+    screen.blit(score_text, (740, 6))
 
     pygame.display.update()
     clock.tick(10)

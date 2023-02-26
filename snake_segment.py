@@ -8,7 +8,6 @@ class snake_segment():
         self.config = config
 
     def shift(self, direction, curr_direction):
-        print(direction + " " + curr_direction)
         if direction == "left" and curr_direction != "right":
             return ("left", self.shift_left())
         elif direction == "right" and curr_direction != "left":
